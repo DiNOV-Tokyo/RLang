@@ -30,12 +30,3 @@ ggplot(iris, aes(x=Sepal.Width)) +
   geom_line(aes(y=iris$norm_dat), color='red') +
   xlim(range(dens$x))
 
-
-
-#q <- qt(c(0.025, 0.975), length(iris$Sepal.Width))
-
-#p <- ggplot()
-#p <- p + geom_path(data=data.frame(X=x<-seq(-4,4,len=101), Y=dt(x, length(iris$Sepal.Width))), aes(x=X, y=Y))
-#p <- p + geom_ribbon(data=data.frame(X=x<-seq(q[1],q[2],len=101), Y=dt(seq(q[1],q[2],len=101), length(iris$Sepal.Width))), aes(x=X, y=Y, ymin=0, ymax=Y))
-#p <- p + geom_ribbon(data=data.frame(X=x<-seq(q[1],q[2],len=101), Y=dt(x, length(iris$Sepal.Width))), aes(x=X, y=Y, ymin=0, ymax=Y))
-#print(p)

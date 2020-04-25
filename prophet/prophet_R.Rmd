@@ -28,21 +28,24 @@ Facebookが提供する時系列データ解析ライブラリであるprophet�
 
 ```{r warning=FALSE}
 
+# 東京電力のホームぺーからデータ取得->prophet用に処理
 e_dat<-data.frame(ds=c(), y=c())
 dat_2020<-read.csv("https://www.tepco.co.jp/forecast/html/images/juyo-2020.csv", header = FALSE)
-dat_tmp<-dat_2020[c(-1:-3),c(-2)]
+dat_tmp<-dat_2020[c(-1:-3),]
 e_dat<-rbind(e_dat, dat_tmp)
 dat_2019<-read.csv("https://www.tepco.co.jp/forecast/html/images/juyo-2019.csv", header = FALSE)
-dat_tmp<-dat_2019[c(-1:-3),c(-2)]
+dat_tmp<-dat_2019[c(-1:-3),]
 e_dat<-rbind(e_dat, dat_tmp)
 dat_2018<-read.csv("https://www.tepco.co.jp/forecast/html/images/juyo-2018.csv", header = FALSE)
-dat_tmp<-dat_2018[c(-1:-3),c(-2)]
+dat_tmp<-dat_2018[c(-1:-3),]
 e_dat<-rbind(e_dat, dat_tmp)
 dat_2017<-read.csv("https://www.tepco.co.jp/forecast/html/images/juyo-2017.csv", header = FALSE)
-dat_tmp<-dat_2017[c(-1:-3),c(-2)]
+dat_tmp<-dat_2017[c(-1:-3),]
 e_dat<-rbind(e_dat, dat_tmp)
-df<-data.frame(ds=gsub("/", "-", e_dat$V1), e_dat$V3)
-colnames(df)=c("ds","y")
+dat_time<-e_dat[e_dat$V2=="10:00",] # 毎日10:00時点のデータのみ抽出
+de_dat<-dat_time[,-2]               # 時間の情報は削除
+df<-data.frame(ds=gsub("/", "-", de_dat$V1), de_dat$V3) # 日付のフォーマットを変更
+colnames(df)=c("ds","y")                                # 列名をprophetで利用できる形に変更
 
 library(prophet)
 model<-prophet(df)

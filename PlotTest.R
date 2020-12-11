@@ -22,6 +22,7 @@ ggplot(iris, aes(x=Sepal.Width)) +
   geom_line(aes(y=iris$norm_dat)) +
   xlim(range(dens$x))
 
+
 ggplot(iris) +
   geom_histogram(aes(Sepal.Width))
 

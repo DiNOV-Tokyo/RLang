@@ -31,3 +31,27 @@ ggplot(dat) + #データフレーム指定
   scale_fill_manual(values=c("green", "orange")) +
   labs(x="Amount of PM2.5")
   
+# 都市で色分けして密度プロットを描く
+ggplot(dat) + #データフレーム指定
+  geom_density(aes(x=dat$Val, 
+                   color=dat$City,
+                   fill=dat$City),
+                   alpha=0.5) +
+  scale_color_manual(values=c("green", "orange"))+
+  scale_fill_manual(values=c("green", "orange"))+
+  labs(x="Amount of PM2.5")
+
+# バイオリンプロットとボックスプロットを重ねて描く
+ggplot(dat) + #データフレーム指定
+  geom_violin(aes(y   =dat$Val, 
+                  x   =dat$City, 
+                  fill=dat$City),
+                  alpha=0.5) +
+  geom_boxplot(aes(y   =dat$Val, 
+                   x   =dat$City), 
+                   fill="grey",
+                   width=0.3,
+                   alpha=0.5) +
+  scale_color_manual(values=c("green", "orange"))+
+  scale_fill_manual(values=c("green", "orange"))+
+  labs(x="Amount of PM2.5", y="Values")
